@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+package-lock.json.backup
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native builds & outputs (Continuous Native Generation)
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.keystore
+
+# Build files / EAS
+*.apk
+*.aab
+*.ipa
+.eas/
+
+# Environment variables & local secrets
+.env
+.env.local
+.env.*.local
+
+# IDEs & Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Agent & AI tool metadata/logs
+.claude/
+.gemini/
+
+# TypeScript build info
+*.tsbuildinfo

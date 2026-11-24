@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Address } from '../types/address';
 
 interface AddressCardProps {
@@ -15,12 +16,13 @@ export default function AddressCard({
 }: AddressCardProps) {
   return (
     <View style={styles.card}>
-      {/* Accent gradient-like top border */}
+      {/* Accent bar */}
       <View style={styles.accentBar} />
 
       <View style={styles.cardHeader}>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>📍 {item.city}</Text>
+          <Ionicons name="location-sharp" size={13} color="#BE185D" />
+          <Text style={styles.badgeText}>{item.city}</Text>
         </View>
         <Text style={styles.pincodeTag}>PIN: {item.pincode}</Text>
       </View>
@@ -30,7 +32,7 @@ export default function AddressCard({
 
         {item.landmark ? (
           <View style={styles.landmarkRow}>
-            <Text style={styles.landmarkIcon}>🧭</Text>
+            <Ionicons name="compass-outline" size={14} color="#92400E" />
             <Text style={styles.landmarkText}>{item.landmark}</Text>
           </View>
         ) : null}
@@ -43,7 +45,7 @@ export default function AddressCard({
         </View>
       </View>
 
-      {/* Action buttons with Instagram style pill designs */}
+      {/* Action buttons */}
       <View style={styles.actions}>
         <TouchableOpacity
           activeOpacity={0.7}
@@ -52,7 +54,8 @@ export default function AddressCard({
           accessibilityRole="button"
           accessibilityLabel="Edit address"
         >
-          <Text style={styles.editBtnText}>✏️ Edit</Text>
+          <Ionicons name="create-outline" size={15} color="#374151" />
+          <Text style={styles.editBtnText}>Edit</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -62,7 +65,8 @@ export default function AddressCard({
           accessibilityRole="button"
           accessibilityLabel="Delete address"
         >
-          <Text style={styles.deleteBtnText}>🗑️ Delete</Text>
+          <Ionicons name="trash-outline" size={15} color="#DC2626" />
+          <Text style={styles.deleteBtnText}>Delete</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -97,6 +101,9 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     backgroundColor: '#FDF2F8',
     paddingHorizontal: 10,
     paddingVertical: 4,
@@ -140,9 +147,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'flex-start',
   },
-  landmarkIcon: {
-    fontSize: 12,
-  },
   landmarkText: {
     fontSize: 13,
     color: '#92400E',
@@ -173,10 +177,12 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   actionBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
     minHeight: 40,
     paddingHorizontal: 16,
     borderRadius: 20,
-    alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
   },

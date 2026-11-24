@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import PrimaryButton from './PrimaryButton';
 
 interface EmptyStateProps {
@@ -14,13 +15,13 @@ export default function EmptyState({
   return (
     <View style={styles.container}>
       <View style={styles.iconCircle}>
-        <Text style={styles.icon}>📬</Text>
+        <Ionicons name="file-tray-outline" size={42} color="#E1306C" />
       </View>
       <Text style={styles.title}>Your Address Book is Empty</Text>
       <Text style={styles.message}>{message}</Text>
       <PrimaryButton
         title="Add New Address"
-        icon="✨"
+        iconName="add"
         onPress={onAddPress}
         style={styles.button}
       />
@@ -51,9 +52,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 10,
     elevation: 4,
-  },
-  icon: {
-    fontSize: 40,
   },
   title: {
     fontSize: 20,

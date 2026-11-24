@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { RootStackParamList } from '../navigation/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { deleteAddress } from '../store/addressesSlice';
@@ -40,7 +41,8 @@ export default function AddressListScreen({ navigation }: Props) {
           accessibilityRole="button"
           accessibilityLabel="Add Address"
         >
-          <Text style={styles.headerButtonText}>+ New</Text>
+          <Ionicons name="add" size={16} color="#FFFFFF" />
+          <Text style={styles.headerButtonText}>New</Text>
         </TouchableOpacity>
       ),
     });
@@ -98,7 +100,7 @@ export default function AddressListScreen({ navigation }: Props) {
           accessibilityRole="button"
           accessibilityLabel="Add New Address"
         >
-          <Text style={styles.fabIcon}>+</Text>
+          <Ionicons name="add" size={30} color="#FFFFFF" />
         </TouchableOpacity>
       )}
     </SafeAreaView>
@@ -139,8 +141,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   headerButton: {
-    paddingHorizontal: 14,
-    paddingVertical: 7,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: 20,
     backgroundColor: '#E1306C',
     shadowColor: '#E1306C',
@@ -170,11 +175,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 10,
     elevation: 6,
-  },
-  fabIcon: {
-    fontSize: 32,
-    color: '#FFFFFF',
-    fontWeight: '300',
-    marginTop: -2,
   },
 });

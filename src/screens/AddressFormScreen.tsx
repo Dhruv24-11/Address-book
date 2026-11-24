@@ -8,9 +8,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
@@ -139,7 +137,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
               maxLength={70}
               showCounter
               multiline
-              icon="🏠"
+              iconName="home-outline"
               error={errors.address}
             />
 
@@ -149,7 +147,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
               value={form.landmark}
               onChangeText={(text) => updateField('landmark', text)}
               maxLength={50}
-              icon="📍"
+              iconName="compass-outline"
               error={errors.landmark}
             />
 
@@ -160,7 +158,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
               onChangeText={handlePincodeChange}
               keyboardType="number-pad"
               maxLength={6}
-              icon="📮"
+              iconName="mail-outline"
               error={errors.pincode}
             />
 
@@ -169,7 +167,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
               placeholder="e.g. Mumbai, New York"
               value={form.city}
               onChangeText={(text) => updateField('city', text)}
-              icon="🏙️"
+              iconName="business-outline"
               error={errors.city}
             />
 
@@ -178,7 +176,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
               placeholder="e.g. Maharashtra, California"
               value={form.state}
               onChangeText={(text) => updateField('state', text)}
-              icon="🗺️"
+              iconName="map-outline"
               error={errors.state}
             />
 
@@ -187,13 +185,13 @@ export default function AddressFormScreen({ route, navigation }: Props) {
               placeholder="e.g. India, United States"
               value={form.country}
               onChangeText={(text) => updateField('country', text)}
-              icon="🌍"
+              iconName="globe-outline"
               error={errors.country}
             />
 
             <PrimaryButton
               title={isEditing ? 'Update Address' : 'Save Address'}
-              icon={isEditing ? '💾' : '✨'}
+              iconName={isEditing ? 'save-outline' : 'checkmark-circle-outline'}
               onPress={handleSubmit}
               style={styles.submitButton}
             />
@@ -201,7 +199,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
             {isEditing ? (
               <PrimaryButton
                 title="Delete This Address"
-                icon="🗑️"
+                iconName="trash-outline"
                 variant="destructive"
                 onPress={handleDelete}
                 style={styles.deleteButton}

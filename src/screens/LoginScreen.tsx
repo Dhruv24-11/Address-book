@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { RootStackParamList } from '../navigation/types';
 import FormField from '../components/FormField';
 import PrimaryButton from '../components/PrimaryButton';
@@ -66,10 +67,10 @@ export default function LoginScreen({ navigation }: Props) {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            {/* Header with Instagram vibe */}
+            {/* Header */}
             <View style={styles.header}>
               <View style={styles.logoBadge}>
-                <Text style={styles.logoIcon}>📇</Text>
+                <Ionicons name="book" size={32} color="#E1306C" />
               </View>
               <Text style={styles.brandTitle}>AddressBook</Text>
               <Text style={styles.brandSubtitle}>
@@ -77,7 +78,7 @@ export default function LoginScreen({ navigation }: Props) {
               </Text>
             </View>
 
-            {/* Premium Card UI with Instagram Glass / Elevation styling */}
+            {/* Elevated Card */}
             <View style={styles.card}>
               <View style={styles.cardHeader}>
                 <Text style={styles.cardTitle}>Sign In</Text>
@@ -86,9 +87,9 @@ export default function LoginScreen({ navigation }: Props) {
                 </Text>
               </View>
 
-              {/* Helpful Hint Banner */}
+              {/* Hint Box with Vector Icon */}
               <View style={styles.hintBox}>
-                <Text style={styles.hintIcon}>💡</Text>
+                <Ionicons name="bulb-outline" size={18} color="#D97706" style={styles.hintIcon} />
                 <Text style={styles.hintText}>
                   Example: If you enter <Text style={styles.boldText}>1234</Text>, the sum is <Text style={styles.boldText}>10</Text> (1+2+3+4).
                 </Text>
@@ -101,7 +102,7 @@ export default function LoginScreen({ navigation }: Props) {
                 onChangeText={handleNumberChange}
                 keyboardType="number-pad"
                 maxLength={4}
-                icon="🔢"
+                iconName="keypad-outline"
                 error={errors.number}
               />
 
@@ -112,7 +113,7 @@ export default function LoginScreen({ navigation }: Props) {
                 onChangeText={handleSumChange}
                 keyboardType="number-pad"
                 maxLength={2}
-                icon="➕"
+                iconName="calculator-outline"
                 error={errors.sum}
               />
 
@@ -120,7 +121,7 @@ export default function LoginScreen({ navigation }: Props) {
                 title="Verify & Enter"
                 onPress={handleLogin}
                 style={styles.loginButton}
-                icon="🚀"
+                iconName="arrow-forward"
               />
             </View>
 
@@ -167,9 +168,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 10,
     elevation: 6,
-  },
-  logoIcon: {
-    fontSize: 34,
   },
   brandTitle: {
     fontSize: 32,
@@ -226,7 +224,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   hintIcon: {
-    fontSize: 16,
+    marginRight: 2,
   },
   hintText: {
     flex: 1,

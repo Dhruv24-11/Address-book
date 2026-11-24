@@ -6,13 +6,14 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 interface FormFieldProps extends TextInputProps {
   label: string;
   error?: string;
   showCounter?: boolean;
   maxLength?: number;
-  icon?: string;
+  iconName?: keyof typeof Ionicons.glyphMap;
 }
 
 export default function FormField({
@@ -22,7 +23,7 @@ export default function FormField({
   showCounter,
   maxLength,
   style,
-  icon,
+  iconName,
   ...props
 }: FormFieldProps) {
   const currentLength = value?.length ?? 0;
@@ -32,7 +33,9 @@ export default function FormField({
     <View style={styles.container}>
       <View style={styles.labelRow}>
         <View style={styles.labelWithIcon}>
-          {icon ? <Text style={styles.icon}>{icon}</Text> : null}
+          {iconName ? (
+            <Ionicons name={iconName} size={15} color="#E1306C" style={styles.icon} />
+          ) : null}
           <Text style={styles.label}>{label}</Text>
         </View>
         {showCounter && maxLength !== undefined && (
@@ -61,7 +64,7 @@ export default function FormField({
       />
       {error ? (
         <View style={styles.errorRow}>
-          <Text style={styles.errorDot}>⚠️</Text>
+          <Ionicons name="alert-circle-outline" size={14} color="#E1306C" />
           <Text style={styles.errorText}>{error}</Text>
         </View>
       ) : null}
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   icon: {
-    fontSize: 14,
+    marginRight: 2,
   },
   label: {
     fontSize: 13,
@@ -127,9 +130,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 4,
     marginTop: 5,
-  },
-  errorDot: {
-    fontSize: 11,
   },
   errorText: {
     color: '#E1306C',

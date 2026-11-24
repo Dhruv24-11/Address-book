@@ -5,13 +5,15 @@ import {
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
+  View,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'destructive' | 'outline' | 'secondary';
   loading?: boolean;
-  icon?: string;
+  iconName?: keyof typeof Ionicons.glyphMap;
 }
 
 export default function PrimaryButton({
@@ -20,12 +22,18 @@ export default function PrimaryButton({
   loading = false,
   disabled,
   style,
-  icon,
+  iconName,
   ...props
 }: PrimaryButtonProps) {
   const isDestructive = variant === 'destructive';
   const isOutline = variant === 'outline';
   const isSecondary = variant === 'secondary';
+
+  const iconColor = isOutline
+    ? '#E1306C'
+    : isSecondary
+    ? '#374151'
+    : '#FFFFFF';
 
   return (
     <TouchableOpacity
@@ -47,18 +55,22 @@ export default function PrimaryButton({
           color={isOutline ? '#E1306C' : '#FFFFFF'}
         />
       ) : (
-        <Text
-          style={[
-            styles.text,
-            isDestructive && styles.destructiveText,
-            isOutline && styles.outlineText,
-            isSecondary && styles.secondaryText,
-            disabled && styles.disabledText,
-          ]}
-        >
-          {icon ? `${icon} ` : ''}
-          {title}
-        </Text>
+        <View style={styles.contentRow}>
+          {iconName ? (
+            <Ionicons name={iconName} size={18} color={iconColor} style={styles.buttonIcon} />
+          ) : null}
+          <Text
+            style={[
+              styles.text,
+              isDestructive && styles.destructiveText,
+              isOutline && styles.outlineText,
+              isSecondary && styles.secondaryText,
+              disabled && styles.disabledText,
+            ]}
+          >
+            {title}
+          </Text>
+        </View>
       )}
     </TouchableOpacity>
   );
@@ -68,7 +80,7 @@ const styles = StyleSheet.create({
   button: {
     minHeight: 50,
     borderRadius: 12,
-    backgroundColor: '#E1306C', // Instagram signature pink/rose
+    backgroundColor: '#E1306C',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
@@ -78,6 +90,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.28,
     shadowRadius: 8,
     elevation: 4,
+  },
+  contentRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  buttonIcon: {
+    marginRight: 2,
   },
   destructiveButton: {
     backgroundColor: '#DC2626',

@@ -76,9 +76,6 @@ export default function LoginScreen({ navigation }: Props) {
                 <Ionicons name="shield-checkmark" size={30} color={colors.primary} />
               </View>
               <Text style={styles.brandTitle}>Address Book</Text>
-              <Text style={styles.brandSubtitle}>
-                Verification Challenge
-              </Text>
             </View>
 
             {/* Elevated Card */}
@@ -132,9 +129,6 @@ export default function LoginScreen({ navigation }: Props) {
 
             {/* Footer */}
             <View style={styles.footer}>
-              <Text style={styles.footerText}>
-                Secure in-memory storage
-              </Text>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>

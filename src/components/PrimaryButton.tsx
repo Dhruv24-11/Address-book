@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../theme/colors';
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
   title: string;
@@ -29,10 +30,12 @@ export default function PrimaryButton({
   const isOutline = variant === 'outline';
   const isSecondary = variant === 'secondary';
 
-  const iconColor = isOutline
-    ? '#E1306C'
+  const iconColor = isDestructive
+    ? colors.dangerText
+    : isOutline
+    ? colors.primary
     : isSecondary
-    ? '#374151'
+    ? colors.textSecondary
     : '#FFFFFF';
 
   return (
@@ -52,7 +55,7 @@ export default function PrimaryButton({
       {loading ? (
         <ActivityIndicator
           size="small"
-          color={isOutline ? '#E1306C' : '#FFFFFF'}
+          color={isDestructive ? colors.dangerText : isOutline ? colors.primary : '#FFFFFF'}
         />
       ) : (
         <View style={styles.contentRow}>
@@ -78,18 +81,18 @@ export default function PrimaryButton({
 
 const styles = StyleSheet.create({
   button: {
-    minHeight: 50,
-    borderRadius: 12,
-    backgroundColor: '#E1306C',
+    minHeight: 48,
+    borderRadius: 10,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 14,
-    shadowColor: '#E1306C',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.28,
-    shadowRadius: 8,
-    elevation: 4,
+    paddingVertical: 13,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 2,
   },
   contentRow: {
     flexDirection: 'row',
@@ -101,19 +104,21 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   destructiveButton: {
-    backgroundColor: '#DC2626',
-    shadowColor: '#DC2626',
-    shadowOpacity: 0.25,
+    backgroundColor: colors.dangerLight,
+    borderWidth: 1,
+    borderColor: colors.dangerBorder,
+    shadowOpacity: 0,
+    elevation: 0,
   },
   outlineButton: {
     backgroundColor: 'transparent',
     borderWidth: 1.5,
-    borderColor: '#E1306C',
+    borderColor: colors.border,
     shadowOpacity: 0,
     elevation: 0,
   },
   secondaryButton: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: colors.surfaceSubtle,
     shadowOpacity: 0,
     elevation: 0,
   },
@@ -124,20 +129,21 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '700',
     letterSpacing: 0.2,
   },
   destructiveText: {
-    color: '#FFFFFF',
+    color: colors.dangerText,
+    fontWeight: '600',
   },
   outlineText: {
-    color: '#E1306C',
+    color: colors.textPrimary,
   },
   secondaryText: {
-    color: '#374151',
+    color: colors.textSecondary,
   },
   disabledText: {
-    color: '#E5E7EB',
+    color: colors.textMuted,
   },
 });

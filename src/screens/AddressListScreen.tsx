@@ -16,6 +16,7 @@ import { Address } from '../types/address';
 import AddressCard from '../components/AddressCard';
 import EmptyState from '../components/EmptyState';
 import { confirmDelete } from '../utils/confirmDelete';
+import { colors } from '../theme/colors';
 
 type AddressListScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -32,7 +33,7 @@ export default function AddressListScreen({ navigation }: Props) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Addresses',
+      headerTitle: 'Address Book',
       headerRight: () => (
         <TouchableOpacity
           onPress={() => navigation.navigate('AddressForm')}
@@ -41,8 +42,8 @@ export default function AddressListScreen({ navigation }: Props) {
           accessibilityRole="button"
           accessibilityLabel="Add Address"
         >
-          <Ionicons name="add" size={16} color="#FFFFFF" />
-          <Text style={styles.headerButtonText}>New</Text>
+          <Ionicons name="add" size={17} color="#FFFFFF" />
+          <Text style={styles.headerButtonText}>Add</Text>
         </TouchableOpacity>
       ),
     });
@@ -68,9 +69,9 @@ export default function AddressListScreen({ navigation }: Props) {
       {addresses.length > 0 && (
         <View style={styles.subHeader}>
           <Text style={styles.countText}>
-            {addresses.length} {addresses.length === 1 ? 'saved address' : 'saved addresses'}
+            {addresses.length} {addresses.length === 1 ? 'Address' : 'Addresses'}
           </Text>
-          <Text style={styles.subHeaderHint}>Tap Edit or Delete to manage</Text>
+          <Text style={styles.subHeaderHint}>Manage entries below</Text>
         </View>
       )}
 
@@ -91,7 +92,7 @@ export default function AddressListScreen({ navigation }: Props) {
         ListEmptyComponent={<EmptyState onAddPress={handleAddNew} />}
       />
 
-      {/* Floating Add Action Button when list is populated */}
+      {/* Floating Action Button */}
       {addresses.length > 0 && (
         <TouchableOpacity
           style={styles.fab}
@@ -100,7 +101,7 @@ export default function AddressListScreen({ navigation }: Props) {
           accessibilityRole="button"
           accessibilityLabel="Add New Address"
         >
-          <Ionicons name="add" size={30} color="#FFFFFF" />
+          <Ionicons name="add" size={28} color="#FFFFFF" />
         </TouchableOpacity>
       )}
     </SafeAreaView>
@@ -110,31 +111,31 @@ export default function AddressListScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAF5FF',
+    backgroundColor: colors.background,
   },
   subHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingVertical: 10,
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#F3E8FF',
+    borderBottomColor: colors.border,
   },
   countText: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '700',
-    color: '#7C3AED',
+    color: colors.primary,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   subHeaderHint: {
     fontSize: 12,
-    color: '#9CA3AF',
+    color: colors.textMuted,
   },
   listContent: {
-    paddingVertical: 12,
+    paddingVertical: 10,
     paddingBottom: 80,
   },
   emptyContainer: {
@@ -146,34 +147,28 @@ const styles = StyleSheet.create({
     gap: 4,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 20,
-    backgroundColor: '#E1306C',
-    shadowColor: '#E1306C',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
+    borderRadius: 8,
+    backgroundColor: colors.primary,
   },
   headerButtonText: {
     color: '#FFFFFF',
-    fontWeight: '800',
+    fontWeight: '700',
     fontSize: 13,
-    letterSpacing: 0.3,
   },
   fab: {
     position: 'absolute',
     right: 20,
     bottom: 24,
-    width: 58,
-    height: 58,
-    borderRadius: 29,
-    backgroundColor: '#E1306C',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#E1306C',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
-    shadowRadius: 10,
-    elevation: 6,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
   },
 });

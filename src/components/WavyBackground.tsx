@@ -7,35 +7,29 @@ interface WavyBackgroundProps {
 }
 
 /**
- * Creates an organic, modern multi-layered wavy & mesh gradient background
- * inspired by Instagram's signature palette (purple, magenta, coral, amber)
- * built purely with React Native shapes and layered translucent circles.
+ * Clean, subtle, modern gradient wave background
+ * using soft slate, indigo, and sky blues for a premium SaaS feel.
  */
 export default function WavyBackground({ style, children }: WavyBackgroundProps) {
   return (
     <View style={[styles.container, style]}>
-      {/* Base warm background */}
       <View style={styles.backgroundBase} />
 
-      {/* Decorative organic wavy curved layers */}
+      {/* Decorative smooth layered waves */}
       <View style={styles.decorativeLayer} pointerEvents="none">
-        {/* Deep Violet / Royal Purple Blob */}
-        <View style={styles.blobPurple} />
+        {/* Soft deep indigo circle */}
+        <View style={styles.blobIndigo} />
 
-        {/* Instagram Hot Magenta / Rose Wave */}
-        <View style={styles.waveMagenta} />
+        {/* Vibrant sky blue curve */}
+        <View style={styles.blobSky} />
 
-        {/* Vibrant Coral / Orange Wave */}
-        <View style={styles.waveCoral} />
+        {/* Subtle cyan accent */}
+        <View style={styles.blobCyan} />
 
-        {/* Golden Amber Sunset Glow */}
-        <View style={styles.glowAmber} />
-
-        {/* Soft frosted glass overlay curve */}
-        <View style={styles.waveWhiteOverlay} />
+        {/* Frosted bottom curve transition */}
+        <View style={styles.bottomCurve} />
       </View>
 
-      {/* Foreground Content */}
       <View style={styles.content}>{children}</View>
     </View>
   );
@@ -45,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: '#FAF5FF',
+    backgroundColor: '#0F172A',
     overflow: 'hidden',
   },
   backgroundBase: {
@@ -54,7 +48,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#FFF7ED', // Warm subtle cream/sunset base
+    backgroundColor: '#0F172A',
   },
   decorativeLayer: {
     position: 'absolute',
@@ -63,64 +57,48 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  // Top right royal purple glow
-  blobPurple: {
+  blobIndigo: {
     position: 'absolute',
-    top: -120,
+    top: -100,
     right: -80,
-    width: 340,
-    height: 340,
-    borderRadius: 170,
-    backgroundColor: '#7C3AED',
-    opacity: 0.85,
-    transform: [{ scaleX: 1.4 }, { rotate: '-25deg' }],
+    width: 360,
+    height: 360,
+    borderRadius: 180,
+    backgroundColor: '#3B82F6',
+    opacity: 0.35,
+    transform: [{ scaleX: 1.3 }],
   },
-  // Large sweeping Instagram magenta curve across the center-top
-  waveMagenta: {
+  blobSky: {
     position: 'absolute',
-    top: -60,
+    top: 40,
     left: -120,
-    width: 440,
+    width: 400,
     height: 380,
     borderRadius: 190,
-    backgroundColor: '#E1306C',
-    opacity: 0.9,
-    transform: [{ rotate: '18deg' }, { scaleX: 1.3 }],
+    backgroundColor: '#1D4ED8',
+    opacity: 0.45,
+    transform: [{ rotate: '25deg' }],
   },
-  // Warm coral orange wave flowing down the right
-  waveCoral: {
+  blobCyan: {
     position: 'absolute',
-    top: 140,
-    right: -100,
-    width: 320,
-    height: 300,
-    borderRadius: 150,
-    backgroundColor: '#FD1D1D',
-    opacity: 0.82,
-    transform: [{ rotate: '-35deg' }],
+    top: 200,
+    right: -60,
+    width: 280,
+    height: 280,
+    borderRadius: 140,
+    backgroundColor: '#0284C7',
+    opacity: 0.3,
   },
-  // Golden yellow-amber accent in the middle
-  glowAmber: {
+  bottomCurve: {
     position: 'absolute',
-    top: 180,
+    bottom: -180,
     left: -60,
-    width: 260,
-    height: 260,
-    borderRadius: 130,
-    backgroundColor: '#FCAF45',
-    opacity: 0.78,
-  },
-  // Soft wavy organic bottom veil
-  waveWhiteOverlay: {
-    position: 'absolute',
-    bottom: -160,
-    left: -80,
-    width: 550,
-    height: 480,
-    borderRadius: 240,
-    backgroundColor: '#FFFFFF',
-    opacity: 0.95,
-    transform: [{ rotate: '-12deg' }, { scaleX: 1.2 }],
+    width: 520,
+    height: 440,
+    borderRadius: 220,
+    backgroundColor: '#1E293B',
+    opacity: 0.8,
+    transform: [{ rotate: '-10deg' }],
   },
   content: {
     flex: 1,

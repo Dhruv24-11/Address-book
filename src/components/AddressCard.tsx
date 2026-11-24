@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Address } from '../types/address';
+import { colors } from '../theme/colors';
 
 interface AddressCardProps {
   item: Address;
@@ -16,36 +17,40 @@ export default function AddressCard({
 }: AddressCardProps) {
   return (
     <View style={styles.card}>
-      {/* Accent bar */}
-      <View style={styles.accentBar} />
-
+      {/* Top Header Row */}
       <View style={styles.cardHeader}>
-        <View style={styles.badge}>
-          <Ionicons name="location-sharp" size={13} color="#BE185D" />
-          <Text style={styles.badgeText}>{item.city}</Text>
+        <View style={styles.locationGroup}>
+          <View style={styles.cityPill}>
+            <Ionicons name="location" size={13} color={colors.primary} />
+            <Text style={styles.cityText}>{item.city}</Text>
+          </View>
+          <Text style={styles.stateCountryText}>{item.state}, {item.country}</Text>
         </View>
-        <Text style={styles.pincodeTag}>PIN: {item.pincode}</Text>
+
+        <View style={styles.pincodeTag}>
+          <Ionicons name="barcode-outline" size={13} color={colors.textLabel} />
+          <Text style={styles.pincodeText}>{item.pincode}</Text>
+        </View>
       </View>
 
+      {/* Main Street Address */}
       <View style={styles.content}>
+        <Text style={styles.addressLabel}>ADDRESS</Text>
         <Text style={styles.addressText}>{item.address}</Text>
 
+        {/* Landmark Row (if provided) */}
         {item.landmark ? (
-          <View style={styles.landmarkRow}>
-            <Ionicons name="compass-outline" size={14} color="#92400E" />
-            <Text style={styles.landmarkText}>{item.landmark}</Text>
+          <View style={styles.landmarkBox}>
+            <Ionicons name="navigate-outline" size={14} color={colors.textLabel} />
+            <Text style={styles.landmarkText}>
+              <Text style={styles.landmarkLabel}>NEAR: </Text>
+              {item.landmark}
+            </Text>
           </View>
         ) : null}
-
-        <View style={styles.locationDetails}>
-          <Text style={styles.regionText}>
-            {item.city}, {item.state}
-          </Text>
-          <Text style={styles.countryText}>{item.country}</Text>
-        </View>
       </View>
 
-      {/* Action buttons */}
+      {/* Action Footer */}
       <View style={styles.actions}>
         <TouchableOpacity
           activeOpacity={0.7}
@@ -54,7 +59,7 @@ export default function AddressCard({
           accessibilityRole="button"
           accessibilityLabel="Edit address"
         >
-          <Ionicons name="create-outline" size={15} color="#374151" />
+          <Ionicons name="pencil-sharp" size={14} color={colors.textSecondary} />
           <Text style={styles.editBtnText}>Edit</Text>
         </TouchableOpacity>
 
@@ -65,7 +70,7 @@ export default function AddressCard({
           accessibilityRole="button"
           accessibilityLabel="Delete address"
         >
-          <Ionicons name="trash-outline" size={15} color="#DC2626" />
+          <Ionicons name="trash-outline" size={14} color={colors.dangerText} />
           <Text style={styles.deleteBtnText}>Delete</Text>
         </TouchableOpacity>
       </View>
@@ -76,132 +81,140 @@ export default function AddressCard({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 16,
+    borderRadius: 14,
     marginHorizontal: 16,
-    marginVertical: 8,
+    marginVertical: 7,
     borderWidth: 1,
-    borderColor: '#F0E7F5',
-    overflow: 'hidden',
-    shadowColor: '#7C3AED',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  accentBar: {
-    height: 4,
-    backgroundColor: '#E1306C',
+    borderColor: colors.border,
+    padding: 16,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
   },
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 14,
-    paddingBottom: 8,
+    marginBottom: 12,
   },
-  badge: {
+  locationGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 8,
+    flex: 1,
+  },
+  cityPill: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: '#FDF2F8',
-    paddingHorizontal: 10,
+    backgroundColor: colors.primaryLight,
+    paddingHorizontal: 9,
     paddingVertical: 4,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#FCE7F3',
-  },
-  badgeText: {
-    color: '#BE185D',
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  pincodeTag: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#6B7280',
-    backgroundColor: '#F3F4F6',
-    paddingHorizontal: 8,
-    paddingVertical: 3,
     borderRadius: 6,
   },
+  cityText: {
+    color: colors.primaryDark,
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  stateCountryText: {
+    fontSize: 13,
+    color: colors.textSecondary,
+    fontWeight: '500',
+  },
+  pincodeTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: colors.surfaceSubtle,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  pincodeText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.textSecondary,
+    fontFamily: 'monospace',
+  },
   content: {
-    paddingHorizontal: 16,
-    paddingBottom: 14,
+    marginBottom: 14,
+  },
+  addressLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.textLabel,
+    letterSpacing: 0.8,
+    marginBottom: 4,
+    textTransform: 'uppercase',
   },
   addressText: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#1F2937',
-    lineHeight: 22,
-    marginBottom: 6,
+    fontWeight: '600',
+    color: colors.textPrimary,
+    lineHeight: 23,
+    marginBottom: 8,
   },
-  landmarkRow: {
+  landmarkBox: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    marginBottom: 6,
-    backgroundColor: '#FFFBEB',
+    backgroundColor: colors.surfaceSubtle,
     paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingVertical: 6,
     borderRadius: 8,
     alignSelf: 'flex-start',
   },
+  landmarkLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.textLabel,
+    textTransform: 'uppercase',
+  },
   landmarkText: {
     fontSize: 13,
-    color: '#92400E',
-    fontWeight: '500',
-  },
-  locationDetails: {
-    marginTop: 4,
-  },
-  regionText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#4B5563',
-  },
-  countryText: {
-    fontSize: 13,
-    color: '#9CA3AF',
-    marginTop: 2,
-    fontWeight: '500',
+    color: colors.textSecondary,
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: 8,
+    paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    backgroundColor: '#FAFAFA',
-    gap: 10,
+    borderTopColor: colors.surfaceSubtle,
   },
   actionBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    minHeight: 40,
-    paddingHorizontal: 16,
-    borderRadius: 20,
+    gap: 5,
+    minHeight: 36,
+    paddingHorizontal: 14,
+    borderRadius: 8,
     justifyContent: 'center',
     borderWidth: 1,
   },
   editBtn: {
     backgroundColor: '#FFFFFF',
-    borderColor: '#E5E7EB',
+    borderColor: colors.border,
   },
   editBtnText: {
-    color: '#374151',
-    fontWeight: '700',
+    color: colors.textSecondary,
+    fontWeight: '600',
     fontSize: 13,
   },
   deleteBtn: {
-    backgroundColor: '#FEF2F2',
-    borderColor: '#FEE2E2',
+    backgroundColor: colors.dangerLight,
+    borderColor: colors.dangerBorder,
   },
   deleteBtnText: {
-    color: '#DC2626',
-    fontWeight: '700',
+    color: colors.dangerText,
+    fontWeight: '600',
     fontSize: 13,
   },
 });

@@ -15,6 +15,7 @@ import FormField from '../components/FormField';
 import PrimaryButton from '../components/PrimaryButton';
 import WavyBackground from '../components/WavyBackground';
 import { LoginErrors, validateLogin } from '../utils/validation';
+import { colors } from '../theme/colors';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -60,21 +61,23 @@ export default function LoginScreen({ navigation }: Props) {
       <SafeAreaView style={styles.safeArea}>
         <KeyboardAvoidingView
           style={styles.keyboardContainer}
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         >
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
+            bounces={false}
           >
             {/* Header */}
             <View style={styles.header}>
               <View style={styles.logoBadge}>
-                <Ionicons name="book" size={32} color="#E1306C" />
+                <Ionicons name="shield-checkmark" size={30} color={colors.primary} />
               </View>
-              <Text style={styles.brandTitle}>AddressBook</Text>
+              <Text style={styles.brandTitle}>Address Book</Text>
               <Text style={styles.brandSubtitle}>
-                Security Challenge Verification
+                Verification Challenge
               </Text>
             </View>
 
@@ -83,13 +86,13 @@ export default function LoginScreen({ navigation }: Props) {
               <View style={styles.cardHeader}>
                 <Text style={styles.cardTitle}>Sign In</Text>
                 <Text style={styles.cardSubtitle}>
-                  Enter any 4-digit code and the exact sum of its digits
+                  Enter a 4-digit code and the exact sum of its digits
                 </Text>
               </View>
 
               {/* Hint Box with Vector Icon */}
               <View style={styles.hintBox}>
-                <Ionicons name="bulb-outline" size={18} color="#D97706" style={styles.hintIcon} />
+                <Ionicons name="information-circle" size={17} color={colors.primary} style={styles.hintIcon} />
                 <Text style={styles.hintText}>
                   Example: If you enter <Text style={styles.boldText}>1234</Text>, the sum is <Text style={styles.boldText}>10</Text> (1+2+3+4).
                 </Text>
@@ -97,6 +100,7 @@ export default function LoginScreen({ navigation }: Props) {
 
               <FormField
                 label="4-Digit Number"
+                required
                 placeholder="e.g. 1234"
                 value={number}
                 onChangeText={handleNumberChange}
@@ -108,6 +112,7 @@ export default function LoginScreen({ navigation }: Props) {
 
               <FormField
                 label="Sum of Digits"
+                required
                 placeholder="e.g. 10"
                 value={sum}
                 onChangeText={handleSumChange}
@@ -128,7 +133,7 @@ export default function LoginScreen({ navigation }: Props) {
             {/* Footer */}
             <View style={styles.footer}>
               <Text style={styles.footerText}>
-                Secure in-memory address management
+                Secure in-memory storage
               </Text>
             </View>
           </ScrollView>
@@ -149,78 +154,75 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingTop: 20,
+    paddingBottom: 40,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 20,
   },
   logoBadge: {
-    width: 68,
-    height: 68,
-    borderRadius: 34,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 12,
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    elevation: 6,
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
   },
   brandTitle: {
-    fontSize: 32,
-    fontWeight: '900',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 6,
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#F8FAFC',
+    letterSpacing: -0.3,
   },
   brandSubtitle: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.92)',
-    fontWeight: '600',
+    fontSize: 13,
+    color: '#94A3B8',
+    fontWeight: '500',
     marginTop: 4,
-    letterSpacing: 0.2,
   },
   card: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 24,
+    borderRadius: 16,
+    padding: 22,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
+    shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.12,
-    shadowRadius: 20,
-    elevation: 8,
+    shadowRadius: 16,
+    elevation: 6,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.8)',
+    borderColor: '#E2E8F0',
   },
   cardHeader: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   cardTitle: {
-    fontSize: 22,
-    fontWeight: '800',
-    color: '#111827',
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.textPrimary,
     marginBottom: 4,
   },
   cardSubtitle: {
     fontSize: 13,
-    color: '#6B7280',
+    color: colors.textSecondary,
     lineHeight: 18,
   },
   hintBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFF7ED',
-    borderRadius: 12,
+    backgroundColor: colors.primaryLight,
+    borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    marginBottom: 18,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#FFEDD5',
+    borderColor: colors.primaryBorder,
     gap: 8,
   },
   hintIcon: {
@@ -229,22 +231,22 @@ const styles = StyleSheet.create({
   hintText: {
     flex: 1,
     fontSize: 12,
-    color: '#9A3412',
+    color: colors.primaryDark,
     lineHeight: 16,
   },
   boldText: {
-    fontWeight: '800',
+    fontWeight: '700',
   },
   loginButton: {
-    marginTop: 10,
+    marginTop: 8,
   },
   footer: {
-    marginTop: 24,
+    marginTop: 20,
     alignItems: 'center',
   },
   footerText: {
     fontSize: 12,
-    color: '#6B7280',
-    fontWeight: '600',
+    color: '#64748B',
+    fontWeight: '500',
   },
 });

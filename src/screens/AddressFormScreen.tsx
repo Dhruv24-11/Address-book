@@ -20,6 +20,7 @@ import FormField from '../components/FormField';
 import PrimaryButton from '../components/PrimaryButton';
 import { AddressErrors, validateAddress } from '../utils/validation';
 import { confirmDelete } from '../utils/confirmDelete';
+import { colors } from '../theme/colors';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AddressForm'>;
 
@@ -110,28 +111,30 @@ export default function AddressFormScreen({ route, navigation }: Props) {
     <SafeAreaView style={styles.safeArea} edges={['bottom', 'left', 'right']}>
       <KeyboardAvoidingView
         style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 88 : 80}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
+          bounces={false}
         >
           <View style={styles.card}>
             <View style={styles.formHeader}>
               <Text style={styles.formTitle}>
-                {isEditing ? 'Update Details' : 'Address Information'}
+                {isEditing ? 'Update Details' : 'Address Details'}
               </Text>
               <Text style={styles.formSubtitle}>
                 {isEditing
-                  ? 'Modify the address information below.'
-                  : 'Enter the recipient details for your address.'}
+                  ? 'Update the address information below.'
+                  : 'Enter the location details below.'}
               </Text>
             </View>
 
             <FormField
               label="Street Address *"
-              placeholder="Flat/House No., Building, Street"
+              placeholder="Flat/House No., Street name"
               value={form.address}
               onChangeText={(text) => updateField('address', text)}
               maxLength={70}
@@ -143,28 +146,28 @@ export default function AddressFormScreen({ route, navigation }: Props) {
 
             <FormField
               label="Landmark"
-              placeholder="Near Metro Station, Behind Mall..."
+              placeholder="Near park, station, etc."
               value={form.landmark}
               onChangeText={(text) => updateField('landmark', text)}
               maxLength={50}
-              iconName="compass-outline"
+              iconName="navigate-outline"
               error={errors.landmark}
             />
 
             <FormField
               label="Pincode *"
-              placeholder="6-digit postal code"
+              placeholder="6-digit PIN code"
               value={form.pincode}
               onChangeText={handlePincodeChange}
               keyboardType="number-pad"
               maxLength={6}
-              iconName="mail-outline"
+              iconName="barcode-outline"
               error={errors.pincode}
             />
 
             <FormField
               label="City *"
-              placeholder="e.g. Mumbai, New York"
+              placeholder="City"
               value={form.city}
               onChangeText={(text) => updateField('city', text)}
               iconName="business-outline"
@@ -173,7 +176,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
 
             <FormField
               label="State *"
-              placeholder="e.g. Maharashtra, California"
+              placeholder="State / Province"
               value={form.state}
               onChangeText={(text) => updateField('state', text)}
               iconName="map-outline"
@@ -182,7 +185,7 @@ export default function AddressFormScreen({ route, navigation }: Props) {
 
             <FormField
               label="Country *"
-              placeholder="e.g. India, United States"
+              placeholder="Country"
               value={form.country}
               onChangeText={(text) => updateField('country', text)}
               iconName="globe-outline"
@@ -191,14 +194,14 @@ export default function AddressFormScreen({ route, navigation }: Props) {
 
             <PrimaryButton
               title={isEditing ? 'Update Address' : 'Save Address'}
-              iconName={isEditing ? 'save-outline' : 'checkmark-circle-outline'}
+              iconName={isEditing ? 'checkmark' : 'add'}
               onPress={handleSubmit}
               style={styles.submitButton}
             />
 
             {isEditing ? (
               <PrimaryButton
-                title="Delete This Address"
+                title="Delete Address"
                 iconName="trash-outline"
                 variant="destructive"
                 onPress={handleDelete}
@@ -215,48 +218,48 @@ export default function AddressFormScreen({ route, navigation }: Props) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FAF5FF',
+    backgroundColor: colors.background,
   },
   keyboardView: {
     flex: 1,
   },
   scrollContent: {
     padding: 16,
-    paddingBottom: 40,
+    paddingBottom: 80,
   },
   card: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    padding: 22,
+    borderRadius: 14,
+    padding: 20,
     borderWidth: 1,
-    borderColor: '#F0E7F5',
-    shadowColor: '#7C3AED',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
+    borderColor: colors.border,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
   },
   formHeader: {
-    marginBottom: 20,
+    marginBottom: 18,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
-    paddingBottom: 14,
+    borderBottomColor: colors.surfaceSubtle,
+    paddingBottom: 12,
   },
   formTitle: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#111827',
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.textPrimary,
     marginBottom: 4,
   },
   formSubtitle: {
     fontSize: 13,
-    color: '#6B7280',
+    color: colors.textSecondary,
     lineHeight: 18,
   },
   submitButton: {
     marginTop: 10,
   },
   deleteButton: {
-    marginTop: 14,
+    marginTop: 12,
   },
 });

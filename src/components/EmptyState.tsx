@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PrimaryButton from './PrimaryButton';
+import { colors } from '../theme/colors';
 
 interface EmptyStateProps {
   message?: string;
@@ -15,12 +16,12 @@ export default function EmptyState({
   return (
     <View style={styles.container}>
       <View style={styles.iconCircle}>
-        <Ionicons name="file-tray-outline" size={42} color="#E1306C" />
+        <Ionicons name="folder-open-outline" size={38} color={colors.primary} />
       </View>
-      <Text style={styles.title}>Your Address Book is Empty</Text>
+      <Text style={styles.title}>No Addresses Yet</Text>
       <Text style={styles.message}>{message}</Text>
       <PrimaryButton
-        title="Add New Address"
+        title="Add Address"
         iconName="add"
         onPress={onAddPress}
         style={styles.button}
@@ -38,37 +39,32 @@ const styles = StyleSheet.create({
     paddingVertical: 60,
   },
   iconCircle: {
-    width: 88,
-    height: 88,
-    borderRadius: 44,
-    backgroundColor: '#FDF2F8',
+    width: 76,
+    height: 76,
+    borderRadius: 38,
+    backgroundColor: colors.primaryLight,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
-    borderWidth: 1.5,
-    borderColor: '#FCE7F3',
-    shadowColor: '#E1306C',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    elevation: 4,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.primaryBorder,
   },
   title: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#1F2937',
-    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.textPrimary,
+    marginBottom: 6,
     textAlign: 'center',
   },
   message: {
     fontSize: 14,
-    color: '#6B7280',
+    color: colors.textSecondary,
     textAlign: 'center',
     lineHeight: 20,
-    marginBottom: 24,
+    marginBottom: 20,
     maxWidth: 280,
   },
   button: {
-    minWidth: 200,
+    minWidth: 180,
   },
 });

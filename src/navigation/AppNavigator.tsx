@@ -4,6 +4,7 @@ import { RootStackParamList } from './types';
 import LoginScreen from '../screens/LoginScreen';
 import AddressListScreen from '../screens/AddressListScreen';
 import AddressFormScreen from '../screens/AddressFormScreen';
+import { colors } from '../theme/colors';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,11 +17,11 @@ export default function AppNavigator() {
           backgroundColor: '#FFFFFF',
         },
         headerTitleStyle: {
-          fontWeight: '800',
-          fontSize: 18,
-          color: '#111827',
+          fontWeight: '700',
+          fontSize: 17,
+          color: colors.textPrimary,
         },
-        headerTintColor: '#E1306C', // Instagram pink back/tint color
+        headerTintColor: colors.primary,
         headerShadowVisible: true,
         animation: 'slide_from_right',
       }}
@@ -34,7 +35,7 @@ export default function AppNavigator() {
         name="AddressList"
         component={AddressListScreen}
         options={{
-          title: 'Addresses',
+          title: 'Address Book',
           headerBackVisible: false,
         }}
       />

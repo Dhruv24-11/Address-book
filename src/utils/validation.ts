@@ -21,7 +21,7 @@ export const validateLogin = (number: string, sum: string): LoginErrors => {
   } else if (!/^\d+$/.test(sum)) {
     errors.sum = 'Sum must contain digits only.';
   } else if (!errors.number && Number(sum) !== sumOfDigits(number)) {
-    errors.sum = 'Incorrect sum. For 1234 the sum is 10.';
+    errors.sum = 'Incorrect sum entered.';
   }
 
   return errors;
